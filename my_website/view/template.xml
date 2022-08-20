@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template id="website_page_template">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <form action="/employee/info" method="POST">
+                    <div class="container oe_addvalue">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Employee Name"/>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-4">
+                                <label for="name">Job Position</label>
+                                <input type="text" class="form-control" id="job_id" name="job_position"
+                                       placeholder="Job Position"/>
+                            </div>
+                            <div class="col-4">
+                                <label for="name">Email</label>
+                                <input type="email" class="form-control" id="email_id" name="email_input"
+                                       placeholder="Enter your email"/>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-4">
+                                <label for="state_id">state</label>
+                                <select name="state" t-attf-state_id="state" t-attf-class="form-control">
+                                    <t t-foreach='state' t-as="name">
+                                        <option>
+                                            <span t-esc="name.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                            <div class="col-4">
+                                <label for="country_id">Country</label>
+                                <select name="country_id" t-attf-country_id="country_id" t-attf-class="form-control">
+                                    <t t-foreach='country' t-as="name">
+                                        <option>
+                                            <span t-esc="name.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!--                        <div class="form-group">-->
+                        <!--                            <label for="partner_id">Sales Partner</label>-->
+                        <!--                            <select name="partner_id" t-attf-country_id="partner_id" t-attf-class="form-control">-->
+                        <!--                                <t t-foreach='sales_partner' t-as="partner">-->
+                        <!--                                    <option>-->
+                        <!--                                        <span t-esc="partner.name"/>-->
+                        <!--                                    </option>-->
+                        <!--                                </t>-->
+                        <!--                            </select>-->
+                        <!--                        </div>-->
+
+                        <br/>
+                        <br/>
+
+                        <button type="submit" class="btn btn-primary addValueBtn ">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </t>
+    </template>
+
+
+    <template id="student_profile">
+        <t t-call="website.layout">
+            <div id="wrap">
+                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                <form action="/student" method="POST">
+                    <button type="Create" class="btn btn-primary ">Create Profile</button>
+                </form>
+            </div>
+            <table class="table table-sm table-bordered">
+                <thead>
+                    <tr style="font-size: 20px ;color:#7C7BAD">
+                        <th valign="middle" align="left">
+                            <strong>Name</strong>
+                        </th>
+                        <th valign="middle" align="left">
+                            <strong>Email</strong>
+                        </th>
+                        <th valign="middle" align="left">
+                            <strong>Job Position</strong>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody class=" body">
+                    <t t-foreach="objects" t-as="object">
+                        <tr>
+                            <td>
+                                <span t-field="object.name"/>
+                            </td>
+                            <td>
+                                <span t-field="object.email"/>
+                            </td>
+                            <td>
+                                <span t-field="object.function"/>
+                            </td>
+                        </tr>
+                    </t>
+                </tbody>
+            </table>
+        </t>
+    </template>
+
+</odoo>
